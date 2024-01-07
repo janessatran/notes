@@ -1,4 +1,4 @@
-## Chapter 1. Welcome to Design Patterns: Intro to Design Patterns
+## Chapter 1. Welcome to Design Patterns: Intro to Design Patterns (Strategy Pattern)
 
 Using design patterns is applying the widsom and lessons learned by other developers who've been down the same design problems road before and survived the trip.
 
