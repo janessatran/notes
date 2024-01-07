@@ -187,3 +187,50 @@ weatherData.notifyObservers();
 weatherData.removeObserver(forecastDisplay);
 
 ```
+
+Comparing my rough design from the actual answer, some improvements that can be made include:
+
+- Adding an interface for the Display classes that each instance implements
+- Updating the _push_ model of data changes to a _pull_ model, so that the observers just take the data they need
+
+```typescript
+inteface DisplayElement {
+  display(): void;
+}
+
+
+interface Observer {
+  update(): void;
+}
+
+
+class CurrentConditionsDisplay implements Observer, DisplayElement {
+  protected humidity: number;
+  protected temperature: number;
+  protected weatherData: WeatherData;
+
+  constructor(wd: WeatherData) {
+    this.weatherData = wd;
+  }
+
+  update(): void {
+    this.humidity = weatherData.getHumidity();
+    this.temperature = weatherData.getTemperature();
+    this.diplay();
+  }
+
+  display {
+      console.log(`Current conditions: ${this.temperature} F degrees, ${this.humidity} % humidity`);
+  }
+}
+
+```
+
+#### Summary
+
+- The **Observer Pattern** defines a one-to-many relationship between objects.
+- Subjects update Observers using a common interface.
+- Observers of any concrete type can participate in the pattern as long as they implement the Observer interface.
+  Observers are loosely coupled in that the Subject knows nothing about them, other than that they implement the Observer interface.
+- You can push or pull data from teh Subject (opt for pull when possible).
+- This pattern is related to the Publish/Subscribe pattern, but the latter is for more complex situations with multiple Subjects and/or multiple message types.
