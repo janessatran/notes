@@ -1,13 +1,16 @@
 "use strict";
 /**
  * Starbuzz Coffee wants to integrate their condiiment options into their software systems.
- * In addition to the coffess, customers can add steamed milk, mocha, soy, or whip
+ * In addition to the coffees, customers can add steamed milk, mocha, soy, or whip
  * to their coffee.
  *
  * To build this in a way that follows the principle of writing objects
- * that are closed for modification, but open for extension, we use
- * the Decorator Pattern to update the Starbuzz Coffee software to meet this
+ * that are closed for modification, but open for extension (aka Open-Closed Principle), we use
+ * the Decorator Pattern to update the Starbuzz Coffee software to meet these
  * requirement.
+ *
+ * For the requirement to account for size of the beverage
+ * when adding costs for Soy milk, see the Soy class!
  *
  * To compile and run this code, cd into the code directory and run the following:
  * tsc ./index.ts --outDir ./build && node ./build/index.js
