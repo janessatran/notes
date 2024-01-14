@@ -224,6 +224,14 @@ class CurrentConditionsDisplay implements Observer, DisplayElement {
 
 ```
 
+#### Design Principle Challenge
+
+| Design Principle                                                                              |                                                                                                                                                                                                                                                                                    |
+| --------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Identify the aspects of your application that vary and separate them from what stays the same | In the Observer Pattern, the subject/observable state varies, along with the observers (since you can add and remove them). You are able to change the observable objects that are observing changes to the subject without changing the subject, which demonstrates this pattern. |
+| Program to an interface, not an implementation.                                               | In the Observer Pattern, we use interfaces to define the Subject/Observable and the Observers. In the Observerable interface, we register and remove the objects that get notified. In the Observer interface, we update the object when the Observable updates.                   |
+| Favor composition over inheritance.                                                           | The Observer Pattern exemplifies this principle when we set up the pattern via interfaces that enable the observers to change at runtime. We're able to register and remove observables without an inheritance hierarchy.                                                          |
+
 #### Summary
 
 - The **Observer Pattern** defines a one-to-many relationship between objects.
