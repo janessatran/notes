@@ -8,6 +8,9 @@
  * the Decorator Pattern to update the Starbuzz Coffee software to meet this
  * requirement.
  *
+ * For the requirement to account for size of the beverage
+ * when adding costs for Soy milk, see the Soy class!
+ *
  * To compile and run this code, cd into the code directory and run the following:
  * tsc ./index.ts --outDir ./build && node ./build/index.js
  */
