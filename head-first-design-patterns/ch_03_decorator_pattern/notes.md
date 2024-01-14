@@ -47,7 +47,7 @@ What are some of the known downsides to the decorator pattern?
 
 Later we will learn about the **Factory and Builder** patterns which should help alleviate some of the above issues!
 
-#### Summary
+### Summary
 
 The Object-oriented Principles we've learned up to this point include:
 
