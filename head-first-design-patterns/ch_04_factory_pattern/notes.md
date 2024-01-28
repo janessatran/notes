@@ -308,9 +308,9 @@ The Factory Method ad Abstract Factory Pattern are both similiar in that they he
 
 - Depend on abstractions. Do not depend on concrete classes.
 
-**Abstract Factory**: Provides an interface for creating families of related or dependent objects without specifying their concrete classes.
+**Abstract Factory**: Provides an interface for creating families of related or dependent objects without specifying their concrete classes. This creational pattern uses composition!
 
-**Factory method**: Defines an interface for creating an object, but lets sublcasses decide which class to instantiate. Factory Methods lets a class defer instantiation to the subclasses.
+**Factory method**: Defines an interface for creating an object, but lets sublcasses decide which class to instantiate. Factory Methods lets a class defer instantiation to the subclasses. THis creational pattern uses inheritance!
 
 - All factories encapsulate object creation.
 - Simple Factory is a simple way to decouple your clients from concrete classes.
