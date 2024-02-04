@@ -33,3 +33,18 @@ Let's say a customer wants to order something from the diner. We can destribe th
 2. The waiter takes the `Order`, so we call `takeOrder()`, and they call `orderUp()` to begin the Order's preparation
 3. The `Order` directs the short-order cook with methods like `makeBurger()`, `makeShake()`
 4. The short-order cook foolows the instructions of the `Order` and produces a meal
+
+| Diner            | Command Pattern |
+| ---------------- | --------------- |
+| Waiter           | Command         |
+| Short-order cook | execute()       |
+| orderUp()        | Client          |
+| Order            | Invoker         |
+| Customer         | Reciever        |
+| takeOrder()      | setCommand()    |
+
+**Loading the Invoker**
+
+1. The client creates a command object.
+2. The client does a `setCommand()` to store the command object in the invoker.
+3. Later, the client asks the invoker to execute the command.
