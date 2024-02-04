@@ -48,3 +48,110 @@ Let's say a customer wants to order something from the diner. We can destribe th
 1. The client creates a command object.
 2. The client does a `setCommand()` to store the command object in the invoker.
 3. Later, the client asks the invoker to execute the command.
+
+### Designing the Remote API
+
+First we need an interface for the commands.
+
+```java
+public interface Command {
+  public void execute();
+}
+```
+
+Now, we can implement this interface for different appliances.
+
+```java
+public class LightOnCommand implements COmmand {
+  Light light;
+
+  public LightOnCommand(Light light) {
+    this.light = light;
+  }
+
+  public void execute() {
+    light.on();
+  }
+}
+```
+
+To use the command object, we can program our remote control to store the command in a slot and execute when the button is pressed.
+
+```java
+public class SingleRemoteControl {
+  // This slot holds our command, which will control one device
+  Command slot;
+
+
+  public SimpleRemoteControl() {}
+
+
+  // We have a method for setting the command the slow is
+  // going to control. This could be called multiple
+  // times if the client of the code wanted to change the
+  // behavior of the remote button.
+  public void setCommand(Command command) {
+    slot = command;
+  }
+
+  // This method is called when the button is presedd
+  public void buttonWasPressed() {
+    slot.execute;
+  }
+}
+
+```
+
+And finally some testing!
+
+```java
+public class RemoteControlTest {
+  public static void main(String[] args) {
+    SimpleRemoteControl remote = new SimpleRemoteCOntrol();
+    Light light = new Light();
+    LightOnCommand lightOn = new LightOnCommand(light);
+
+    remote.setCOmmand(lightOn);
+    remote.buttonWasPressed();
+  }
+}
+```
+
+#### ✏️ Practice - Implementing the `GarageDoorOpenCommand` class
+
+```java
+public interface GarageDoor() {
+  up();
+  down();
+  stop();
+  lightOn();
+  lightOff();
+}
+
+```
+
+```java
+public class GarageDoorOpenedCommand implements Command {
+  GarageDoor garageDoor;
+
+  public GarageDoorDoorOpenedCommand(GarageDoor: garageDoor) {
+    this.garageDoor = garageDoor;
+  }
+
+  public execute() {
+    this.garageDoor.up();
+  }
+}
+```
+
+> 💡 The Command Pattern encapsulates a request as an object, thereby letting you parameterize other objects with different requests, queue or log requests, and support undoable operations.
+
+So far, we've seen examples of how a command object encapsulates a request by binding together a set of actions on a specific reciever. This is done by packaging the actions and the reciever into an object that exposes just on emethod `execute` (for example: Garage Door is the receiever, and the action is up).
+
+We've also seen examples of parameterizing an object with a command. We first called our remote control with the "light on" command and then replaced it with "garage door open".
+
+Next, we will learn how to implement queues and logs and support undo operations! We will also learn about the Meta Command Pattern, which allows you to create macros of commands so that you can execute multiple commands at once.
+
+### The Command Pattern Defined
+
+![Alt text](image.png)
