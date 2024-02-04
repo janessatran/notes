@@ -210,3 +210,133 @@ public class RemoteCOntrol {
 }
 
 ```
+
+We also need to add on and off functionality for our devices.
+
+```java
+public class StereoOnWithCDCommand implements Command {
+  Stereo stereo;
+
+  public StereoOnWithCdCommand(Stereo stereo) {
+    this.stereo = stereo;
+  }
+
+  public void execute() {
+    stereo.on();
+    stereo.setCD();
+    stereo.setVolume(11);
+  }
+}
+
+
+```
+
+**📝 Noteworthy: Using a Null Object**
+In our implementation, we used a `NoCommand` object to set up our remote control buttons. This is an example of a null object, which is useful when you don't have a meaningful object to return, but you don't want to remove the responsibility for handling null from the client.
+
+### Supporting Undo functionality
+
+When commands support undo, they have an `undo()` method that mirrors the `execute()` method. Whatever `execute()` last did, `undo()` reverses.
+
+So, in order to support this functionality, we need to udpate our Command Interface to include this method.
+
+```java
+public interface Command {
+  public void execute();
+  public void undo();
+}
+```
+
+Now we implement it for each command (it will of course look different for each).
+
+```java
+public class LightOnCommand implements Command {
+  Light light;
+
+  public LightOnCommand(Light light) {
+    this.light = light;
+  }
+
+  public void execute() {
+    light.on();
+  }
+
+  public void undo() {
+    light.off();
+  }
+}
+
+```
+
+```java
+public class LightOffCommand implements Command {
+
+  public LightOnCommand(Light light) {
+    this.light = light;
+  }
+
+  public void execute() {
+    light.on();
+  }
+
+  public void undo() {
+    light.on();
+  }
+}
+
+```
+
+Now, to get our Remote Control class to support it, we need a new instance variable to track the last command invoked. Whenever undo is pressed, we retrieve that command and invoke its `undo()` method.
+
+```java
+public class RemoteControlWithUndo {
+  Command[] onCommands;
+  Command[] offCommands;
+
+  // new instance var alert!!
+  Command undoCommand;
+
+  public RemoteControl() {
+    onCommands = new Command[7];
+    offCommands = new Command[7];
+
+    Command noCommand = new NoCommand();
+    for(int i = 0; i < 7; i++) {
+      onCommands[i] = noCommand;
+      offCOmmands[i] = noCommand;
+    }
+
+    undoCommand = noCommand;
+  }
+
+  public void setCommand(int slot, Command onCOmmand, Command offCommand) {
+    onCommands[slot] = onCommand;
+    offCommands[slot] = offCommand;
+  }
+
+  public void onButtonWasPushed(int slot) {
+    onCommands[slot].execute();
+    undoCommand = onCommands[slot];
+  }
+
+  public void offButtonWasPushed(int slot) {
+    offCommands[slot].execute();
+    undoCommand = offCommands[slot];
+  }
+
+  public void undoButtonWasPushed() {
+    undoCommand.undo();
+  }
+
+  public String toString() {
+    StringBuffer stringBuff = new StringBuffer();
+
+    stringBuff.append("\n -------- Remote Control --------\n");
+    for(int i = 0; i < onCommands.length; i++) {
+      stringBuff.append("[slot " + i + "]" + onCommands[i].getClass().getName() + "    " + offCommands[i].getClass().getName() + "\n");
+    }
+  }
+
+}
+
+```
