@@ -155,3 +155,58 @@ Next, we will learn how to implement queues and logs and support undo operations
 ### The Command Pattern Defined
 
 ![Alt text](image.png)
+
+1. The **Invoker** is responsible for initiating requests. This class must have a field for storing a reference to a command object. The invoker triggers that command instead of sending the request directly the reciever.
+2. The **Command** interface usually declares just a single method for executing the command.
+3. **Concrete Commands** implement various kinds fo requests. A concrete command isn't supposed to perform the work on its own, but rather to pass the call to one of the business logic objects.
+4. The **Receiver** class contains some business logic. Most commands only handle the details of how a request is passed to the receiver, while the receiver itself does the actual work.
+5. The **CLient** creats and configures concrete command objects. The client must pass all the request parameters, including a reciever instance, into the commands constructor. After that, the resulting command may be associated with one or multiple senders.
+
+### Assigning Commands to slots
+
+If you recal,, we have seven slots on our remote. We're going to assign a command to each slot in the remote control.
+
+- Our remote control is the _invoker_
+- When a button is pressed, the execute() method will be called on the corresponding command, which results in actions being invoked on the _receiver_ (lights, ceiling fans, stereos,e tc)
+
+```java
+public class RemoteCOntrol {
+  Command[] onCommands;
+  Command[] offCommands;
+
+  public RemoteControl() {
+    onCommands = new Command[7];
+    offCommands = new Command[7];
+
+    Command noCommand = new NoCommand();
+    for(int i = 0; i < 7; i++) {
+      onCommands[i] = noCommand;
+      offCOmmands[i] = noCommand;
+    }
+  }
+
+  public void setCommand(int slot, Command onCOmmand, Command offCommand) {
+    onCommands[slot] = onCommand;
+    offCommands[slot] = offCommand;
+  }
+
+  public void onButtonWasPushed(int slot) {
+    onCommands[slot].execute();
+  }
+
+  public void offButtonWasPushed(int slot) {
+    offCommands[slot].execute();
+  }
+
+  public String toString() {
+    StringBuffer stringBuff = new StringBuffer();
+
+    stringBuff.append("\n -------- Remote Control --------\n");
+    for(int i = 0; i < onCommands.length; i++) {
+      stringBuff.append("[slot " + i + "]" + onCommands[i].getClass().getName() + "    " + offCommands[i].getClass().getName() + "\n");
+    }
+  }
+
+}
+
+```
