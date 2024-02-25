@@ -1,8 +1,7 @@
 # Notes
 
-<center>
-![alt text](image.png)
-</center>
+![An image of a notebook with circle around it, underneath the image is text saying Janessa's Dev Notes - A collection of my developer notes](image.png)
+
 
 ## Books
 
