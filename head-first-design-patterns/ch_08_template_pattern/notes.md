@@ -1,6 +1,9 @@
 ## Chapter 8. Encapsulating Algorithms: The Template Method Pattern
 
-Code duplication is a good sign we need to clean up the design by abstracting the commonality into a base class.
+Use the Template Method pattern when you want to let clients extend only particular steps of an algorithm, but not the whole algorithm or its structure.
+
+Code duplication is a good sign we need to clean up the design by abstracting the commonality into a base class. We can do this by employing the Template Method pattern!
+
 
 **Example: classes to represent making coffee and tea**
 The recipe to make coffee is pretty similar for the recipe to make tea.
@@ -338,3 +341,4 @@ Our newest OO Principle: Don't call us, we'll call you. 😎
 - You'll see lots of uses of the Template Method Pattern in real-world code, but (as with any pattern), don't expect it all to be designed "by the book"
 - The Strategy and Template Method Patterns both encapsulate algorithms, the first by composition, the second by inheritance.
 - Factory Method is a specialization of the Template Method.
+
