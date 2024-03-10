@@ -1,5 +1,14 @@
 ## Chapter 10. The State of Things: The State Pattern
 
+**When to use it:**
+
+- Use the State Pattern when you have an object that behaves differently depending on its current state, the number of states is large, and the state-specific code changes frequently.
+  - Extract all state-specific code into a set of distinct classes.
+  - This facilitates adding new states or changing existing ones indepdnently of each other, reducing the maintenance cost.
+- Use the pattern when you have a class that has massive conditionals that alter the behaveior according to current values of the class's fields.
+- Use this when you have a lot of duplicate code across similar states and transitions of a condition-based state machine.
+  - When you see this, you can refactor to compose hierarchies of state classes to reduce duplication by extracting common code into abstract base classes.
+
 The Strategy and State Pattern are closely related, though they have different intents. The Strategy pattern helps with intechangeability of algorithms, while State helps objects control their behavior by changing their internal state.
 
 ### State Machines 101
