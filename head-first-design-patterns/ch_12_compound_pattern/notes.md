@@ -487,23 +487,31 @@ We also need to update the QuackCounter decorator to make it an Observable.
 
 ```java
 public class QuackCounter implements Quackable {
-  Observable observable;
+  Quackable duck;
   // We use a static var because we're keeping count of the total quacks
   static int numberOfQuacks;
 
   public QuackCounter(Quackable duck) {
-    this.observable = duck;
+    this.duck = duck;
   }
 
   public void quack() {
     // When quack() is called, we delegate the call to the Quackable
     // we're decorating
-    observable.quack();
+    duck.quack();
     numberOfQuacks++;
   }
 
   public static int getQuacks() {
     return numberOfQuacks;
+  }
+
+  public void registerObserver(Observer observer) {
+    duck.registerObserver(observer);
+  }
+
+  public void notifyObservers() {
+    duck.notifyObservers();
   }
 }
 
